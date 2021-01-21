@@ -1,26 +1,16 @@
 import React from 'react';
-import { colors, fontWeights } from 'config/styles';
-import { css } from 'glamor';
-
-css.global('*, *:before, *:after', {
-	boxSizing: 'border-box'
-});
-
-css.global('body', {
-	fontFamily: 'Open Sans, sans-serif'
-});
+import { browserHistory, IndexRoute, Route, Router } from 'react-router';
+import Layout from './layout';
+import Landing from './landing';
+import Todos from './todos';
 
 export default function App() {
-	return <h1 css={styles.title}>Welcome to Planity !</h1>;
+	return (
+		<Router history={browserHistory}>
+			<Route path={'/'} component={Layout}>
+				<IndexRoute component={Landing} />
+				<Route path={'todos'} component={Todos} />
+			</Route>
+		</Router>
+	);
 }
-
-const styles = {
-	title: {
-		'margin': 10,
-		'color': colors.green500,
-		'fontWeight': fontWeights.bold,
-		'@media (min-width: 500px)': {
-			color: 'red'
-		}
-	}
-};
