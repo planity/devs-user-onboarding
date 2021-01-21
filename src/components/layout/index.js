@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { useUncompletedTodosCount } from '../todos/context';
 import { css } from 'glamor';
 
 css.global('*, *:before, *:after', {
@@ -11,11 +12,12 @@ css.global('body', {
 });
 
 export default function Layout({ children }) {
+	const todosCount = useUncompletedTodosCount();
 	return (
 		<div>
 			<nav css={styles.nav}>
 				<Link to={'/'}>Home</Link>
-				<Link to={'/todos'}>Todos</Link>
+				<Link to={'/todos'}>Todos ({todosCount})</Link>
 			</nav>
 			{children}
 		</div>
